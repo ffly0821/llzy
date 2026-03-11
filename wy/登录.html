@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小猫小狗好朋友 - 登录/注册</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+        }
+
+        /* 登录注册容器 */
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 切换标签栏 */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            color: #f97316;
+            border-bottom: 3px solid #f97316;
+        }
+
+        /* 表单容器 */
+        .auth-forms {
+            padding: 30px;
+        }
+
+        /* 表单样式（默认隐藏注册表单） */
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        /* 表单组 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* 标签 */
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* 输入框 */
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #f97316;
+        }
+
+        /* 错误提示 */
+        .error-tip {
+            color: #ff4d4f;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px 0;
+            background-color: #f97316;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #ea580c;
+        }
+
+        /* 协议提示（注册页） */
+        .agreement {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .agreement a {
+            color: #f97316;
+            text-decoration: none;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 500px) {
+            .auth-container {
+                margin: 0 20px;
+            }
+            .auth-forms {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录注册容器 -->
+    <div class="auth-container">
+        <!-- 切换标签 -->
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">登录</div>
+            <div class="auth-tab" data-tab="register">注册</div>
+        </div>
+
+        <!-- 表单区域 -->
+        <div class="auth-forms">
+            <!-- 登录表单 -->
+            <div class="form active" id="login-form">
+                <div class="form-group">
+                    <label class="form-label">手机号/用户名</label>
+                    <input type="text" class="form-input" id="login-account" placeholder="请输入手机号或用户名">
+                    <div class="error-tip" id="login-account-error">请输入正确的手机号/用户名</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">密码</label>
+                    <input type="password" class="form-input" id="login-pwd" placeholder="请输入密码">
+                    <div class="error-tip" id="login-pwd-error">密码长度不少于6位</div>
+                </div>
+                <button class="submit-btn" id="login-btn">登录</button>
+            </div>
+
+            <!-- 注册表单 -->
+            <div class="form" id="register-form">
+                <div class="form-group">
+                    <label class="form-label">手机号</label>
+                    <input type="tel" class="form-input" id="reg-phone" placeholder="请输入11位手机号">
+                    <div class="error-tip" id="reg-phone-error">请输入正确的11位手机号</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">验证码</label>
+                    <input type="text" class="form-input" id="reg-code" placeholder="请输入验证码" style="width: 60%; display: inline-block;">
+                    <button class="submit-btn" id="get-code-btn" style="width: 38%; padding: 12px 0; font-size: 14px;">获取验证码</button>
+                    <div class="error-tip" id="reg-code-error">请输入6位数字验证码</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">设置密码</label>
+                    <input type="password" class="form-input" id="reg-pwd" placeholder="请设置6-16位密码（字母+数字）">
+                    <div class="error-tip" id="reg-pwd-error">密码需包含字母和数字，长度6-16位</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">确认密码</label>
+                    <input type="password" class="form-input" id="reg-repwd" placeholder="请再次输入密码">
+                    <div class="error-tip" id="reg-repwd-error">两次密码输入不一致</div>
+                </div>
+                <button class="submit-btn" id="reg-btn">注册</button>
+                <div class="agreement">
+                    点击注册即表示同意<a href="#">《用户服务协议》</a>和<a href="#">《隐私政策》</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 登录/注册标签切换
+        const tabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 移除所有标签active类
+                tabs.forEach(t => t.classList.remove('active'));
+                // 给当前标签加active
+                tab.classList.add('active');
+                // 切换表单显示
+                if (tab.dataset.tab === 'login') {
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    loginForm.classList.remove('active');
+                    registerForm.classList.add('active');
+                }
+            });
+        });
+
+        // 2. 表单验证工具函数
+        function showError(tipId) {
+            document.getElementById(tipId).style.display = 'block';
+        }
+
+        function hideError(tipId) {
+            document.getElementById(tipId).style.display = 'none';
+        }
+
+        // 验证手机号
+        function validatePhone(phone) {
+            const reg = /^1[3-9]\d{9}$/;
+            return reg.test(phone);
+        }
+
+        // 验证密码（字母+数字，6-16位）
+        function validatePwd(pwd) {
+            const reg = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,16}$/;
+            return reg.test(pwd);
+        }
+
+        // 3. 登录按钮点击事件
+        const loginBtn = document.getElementById('login-btn');
+        loginBtn.addEventListener('click', () => {
+            const account = document.getElementById('login-account').value.trim();
+            const pwd = document.getElementById('login-pwd').value.trim();
+            let isOk = true;
+
+            // 验证账号
+            if (!account) {
+                showError('login-account-error');
+                isOk = false;
+            } else {
+                hideError('login-account-error');
+            }
+
+            // 验证密码
+            if (pwd.length < 6) {
+                showError('login-pwd-error');
+                isOk = false;
+            } else {
+                hideError('login-pwd-error');
+            }
+
+            // 验证通过，提交请求（这里仅做演示，实际对接后端）
+            if (isOk) {
+                // 模拟登录请求
+                alert('登录成功！即将跳转到首页');
+                // 实际项目中：axios.post('/api/login', {account, pwd}).then(res => { ... })
+                // 登录成功后跳转到首页：window.location.href = 'index.html';
+            }
+        });
+
+        // 4. 注册按钮点击事件
+        const regBtn = document.getElementById('reg-btn');
+        regBtn.addEventListener('click', () => {
+            const phone = document.getElementById('reg-phone').value.trim();
+            const code = document.getElementById('reg-code').value.trim();
+            const pwd = document.getElementById('reg-pwd').value.trim();
+            const repwd = document.getElementById('reg-repwd').value.trim();
+            let isOk = true;
+
+            // 验证手机号
+            if (!validatePhone(phone)) {
+                showError('reg-phone-error');
+                isOk = false;
+            } else {
+                hideError('reg-phone-error');
+            }
+
+            // 验证验证码
+            if (!/^\d{6}$/.test(code)) {
+                showError('reg-code-error');
+                isOk = false;
+            } else {
+                hideError('reg-code-error');
+            }
+
+            // 验证密码
+            if (!validatePwd(pwd)) {
+                showError('reg-pwd-error');
+                isOk = false;
+            } else {
+                hideError('reg-pwd-error');
+            }
+
+            // 验证确认密码
+            if (repwd !== pwd) {
+                showError('reg-repwd-error');
+                isOk = false;
+            } else {
+                hideError('reg-repwd-error');
+            }
+
+            // 验证通过，提交注册（演示）
+            if (isOk) {
+                alert('注册成功！即将跳转到登录页');
+                // 实际项目中：axios.post('/api/register', {phone, code, pwd}).then(res => { ... })
+                // 注册成功后切回登录标签：tabs[0].click();
+            }
+        });
+
+        // 5. 获取验证码按钮（演示倒计时）
+        const getCodeBtn = document.getElementById('get-code-btn');
+        getCodeBtn.addEventListener('click', () => {
+            const phone = document.getElementById('reg-phone').value.trim();
+            if (!validatePhone(phone)) {
+                showError('reg-phone-error');
+                return;
+            }
+
+            // 倒计时逻辑
+            let count = 60;
+            getCodeBtn.disabled = true;
+            getCodeBtn.style.backgroundColor = '#ccc';
+            getCodeBtn.innerText = `重新获取(${count}s)`;
+
+            const timer = setInterval(() => {
+                count--;
+                getCodeBtn.innerText = `重新获取(${count}s)`;
+                if (count === 0) {
+                    clearInterval(timer);
+                    getCodeBtn.disabled = false;
+                    getCodeBtn.style.backgroundColor = '#f97316';
+                    getCodeBtn.innerText = '获取验证码';
+                }
+            }, 1000);
+
+            // 实际项目中：调用后端接口发送验证码
+            // axios.get(`/api/sendCode?phone=${phone}`).then(res => { ... })
+            alert('验证码已发送，请注意查收');
+        });
+
+        // 输入框聚焦时隐藏错误提示
+        const allInputs = document.querySelectorAll('.form-input');
+        allInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                const errorId = input.id + '-error';
+                hideError(errorId);
+            });
+        });
+    </script>
+</body>
+</html>

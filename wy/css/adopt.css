@@ -1,0 +1,342 @@
+/*顶部广告 start*/
+.header {
+    width: 100%;
+    height: 120px;
+    overflow: hidden; /* 裁剪超出header的部分（关键修改） */
+    position: relative;
+    /* 去掉flex居中，避免限制图片宽度 */
+}
+
+.header img {
+    width: 100%; /* 宽度强制撑满父容器（关键修改） */
+    height: 120px; /* 保持固定高度 */
+    object-fit: cover; /* 覆盖模式，裁剪多余部分，保持比例（关键修改） */
+    display: block; /* 消除图片底部默认空白 */
+}
+/*顶部广告 end*/
+
+/* 黑色导航  start*/
+
+.black-nav{
+    width:100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #bbd2fd;
+    font-size: 13px;
+     position: relative; /* 开启定位 */
+    z-index: 999; /* 导航层级高于图片，二维码基于导航定位 */
+}
+    
+.wrap{
+    width:1300px;
+    margin: 0 auto; /*边距,左右居中*/
+} 
+    
+/*左边导航*/
+.black-nav .wrap .black-nav-left{
+    float: left;
+}
+    
+/*右边导航*/
+.black-nav .wrap .black-nav-right{
+    float: right;
+}
+    
+.black-nav .wrap  li{
+    float: left;
+    position: relative;
+}
+.black-nav a{
+    color: #000000;
+}
+/*字间隔*/    
+.black-nav .wrap  li span{
+    color: #424242;
+    margin: 0 30px;
+}
+
+span{font-family: 'icomoon'; /*导入图标*/
+    margin-left: -10px; /* 向左偏移10px */
+    display: inline-block; /* 确保span能正常显示图标 */
+}
+
+/*导入字体图标库*/
+
+.download{
+    width: 124px;
+    height: 0;
+    background: #fff;
+    box-shadow: 0 1px 5px #aaa; /*设置元素的 阴影效果
+    0: 水平方向偏移为 0（不往左也不往右偏移）。
+    1px: 垂直方向偏移为 1 像素（阴影向下偏移 1 像素）。
+    5px: 模糊半径为 5 像素（阴影边缘模糊的范围）。
+    #aaa: 阴影颜色为浅灰色。*/
+    position:absolute;
+    top: 50px;
+    left: 30%;
+    margin-left: -62px;
+    overflow: hidden;
+    z-index: 9999; /* 极高层级，确保不被任何元素遮挡 */
+}
+
+
+.download img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.download p{
+    color: #333;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+/*让鼠标划到下载APP显示图片*/
+.black-nav-left li:hover>.download{
+    height:148px ;
+}
+
+/*小箭头*/
+.stri{
+    width: 0;
+    height: 0;  /*设置为0默认不显示*/
+    border-bottom: 8px solid #fff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    margin-left: -8px;
+    display: none;
+    z-index: 9999; /* 箭头层级同步提升 */
+}
+
+.black-nav-left li:hover>.stri{
+    display: block;
+}
+
+.cart{
+    width: 160px;
+    height: 50px;
+    background-color: #9ebef8;
+    margin-left: 25px; /*元素与其左侧内容之间的距离*/
+}
+
+.cart:hover{
+    background: #fff;
+}/*在鼠标悬停时，改变 .cart 的背景颜色，增强交互效果。*/
+
+.cart:hover>a{
+    color: rgb(226, 137, 74);
+}/*在鼠标悬停时，改变 .cart 内直接子元素 <a> 的文字颜色，增强交互效果。*/
+
+.cart i{
+    font-style: normal; /*设置 <i> 标签的字体样式为正常（非斜体）。默认情况下，<i> 标签的字体是斜体，此规则覆盖了默认样式。*/
+    margin-right: 8px;/*为 <i> 标签的右侧添加 8 像素的外边距，与右侧内容保持间距。*/
+}
+
+.cart-list{
+    width: 316px;
+    height: 0px; /*初始状态下，将 .cart-list 的高度设置为 0，使其不可见。*/
+    background: #fff;
+    box-shadow:  0 2px 10px rgba(0, 0, 0, 0.15);/*添加阴影效果，使 .cart-list 看起来有浮起的感觉。*/
+    position: absolute;
+    right: 0;/*将 .cart-list 定位到其父容器的右侧边缘。*/
+    top: 50px;
+    color: #424242;
+    overflow: hidden;/*隐藏 .cart-list 中超出容器的内容。*/
+    line-height: 100px;/*设置 .cart-list 的行高为 100 像素，使内容在垂直方向上居中（前提是内容只有一行）。*/
+}
+
+.cart:hover>.cart-list{
+    height: 100px;
+}/*在鼠标悬停时，显示 .cart-list 元素，并设置其高度为 100 像素。*/
+
+/* 小猫种类样式 */
+.cat {
+    position: relative;
+    padding: 0 10px; /* 给 .cat 添加左右内边距，使背景框更居中 */
+    cursor: pointer;
+    height: 50px; /* 添加固定高度 */
+    display: inline-flex; /* 使用inline-flex使内容垂直居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+
+.cat i{
+    font-style: normal; /*设置 <i> 标签的字体样式为正常（非斜体）。默认情况下，<i> 标签的字体是斜体，此规则覆盖了默认样式。*/
+    margin-right: 8px;/*为 <i> 标签的右侧添加 8 像素的外边距，与右侧内容保持间距。*/
+}
+
+
+/*黑色导航  end */
+
+/* 宠物领养标题模块容器 */
+.adopt-title-section {
+  width: 100%;
+  max-width: 1200px; /* 和你现有功能框宽度一致，保持视觉统一 */
+  margin: 40px auto; /* 上下间距40px，左右居中 */
+  padding: 0 20px; /* 小屏幕左右留白 */
+  text-align: center; /* 文字居中 */
+}
+
+/* 主标题：橙色、加粗、下划线 */
+.adopt-main-title {
+  font-size: 55px; /* 匹配示例字体大小 */
+  font-weight: bold; /* 加粗 */
+  color: #f97316; /* 示例橙色主色 */
+  margin-bottom: 10px; /* 和副标题间距 */
+  position: relative; /* 为下划线定位 */
+  display: inline-block; /* 让下划线宽度适配文字 */
+}
+
+/* 标题下方橙色下划线（核心样式） */
+.adopt-main-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px; /* 下划线在标题下方8px */
+  left: 50%;
+  transform: translateX(-50%); /* 下划线居中 */
+  width: 60px; /* 下划线宽度 */
+  height: 3px; /* 下划线高度 */
+  background-color: #f97316; /* 下划线橙色，和标题一致 */
+}
+
+/* 副标题：浅灰色、小号字体 */
+.adopt-subtitle {
+  font-size: 20px; /* 匹配示例小字大小 */
+  color: #999999; /* 浅灰色，和示例一致 */
+  line-height: 1.6; /* 行高更舒适 */
+  margin: 0; /* 清除默认边距 */
+  max-width: 800px; /* 限制副标题宽度，避免过长 */
+  margin: 0 auto; /* 副标题居中 */
+}
+
+/* 响应式适配小屏幕 */
+@media (max-width: 768px) {
+  .adopt-main-title {
+    font-size: 22px; /* 小屏幕标题缩小 */
+  }
+  .adopt-subtitle {
+    font-size: 13px; /* 小屏幕副标题缩小 */
+    padding: 0 10px;
+  }
+}
+
+/* 宠物列表容器 */
+.pet-list-container {
+  width: 100%;
+  max-width: 1200px; 
+  margin: 60px auto; /* 上下间距，左右居中 */
+  padding: 0 20px; /* 小屏幕左右留白 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 核心：3列等宽 */
+  gap: 30px; /* 卡片之间的间距（行+列） */
+}
+
+/* 单个宠物卡片样式 */
+.pet-card {
+  background-color: #ffffff;
+  border-radius: 12px; /* 圆角，匹配示例 */
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* 轻微阴影，提升质感 */
+  position: relative; /* 为右上角标签定位 */
+}
+
+/* 宠物图片容器：控制图片比例 */
+.pet-img-wrapper {
+  width: 100%;
+  height: 280px; /* 固定图片高度，统一卡片视觉 */
+  border-radius: 8px; /* 图片圆角 */
+  overflow: hidden; /* 裁剪溢出的图片 */
+  margin-bottom: 15px;
+  position: relative; /* 为标签定位 */
+}
+
+/* 宠物图片样式：保持比例，填满容器 */
+.pet-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 裁剪图片，保持比例 */
+  object-position: center; /* 居中显示 */
+}
+
+/* 右上角标签（新品） */
+.pet-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4d4f; /* 红色标签，匹配示例 */
+  color: #ffffff;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* 宠物名称 */
+.pet-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* 宠物基本信息（性别/年龄/品种） */
+.pet-info {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 15px; /* 信息之间的间距 */
+  flex-wrap: wrap; /* 小屏幕自动换行 */
+}
+
+/* 宠物描述文字 */
+.pet-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  height: 60px; /* 固定描述高度，统一卡片底部 */
+  overflow: hidden; /* 超出部分省略 */
+  display: -webkit-box;
+ -webkit-line-clamp: 3;/* 最多显示3行 */
+  -webkit-box-orient: vertical;
+}
+
+/* 领养按钮：橙色圆角，匹配示例 */
+.pet-btn {
+  display: block; /* 按钮占满宽度 */
+  width: 100%;
+  padding: 8px 0;
+  background-color: #f97316; /* 和你现有功能框按钮同色，保持统一 */
+  color: #ffffff;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none; /* 去除下划线 */
+  transition: background-color 0.3s ease;
+}
+
+.pet-btn:hover {
+  background-color: #ea580c; /* hover加深颜色 */
+}
+
+/* 响应式适配：小屏幕调整列数 */
+@media (max-width: 992px) {
+  .pet-list-container {
+    grid-template-columns: repeat(2, 1fr); /* 平板：2列 */
+  }
+}
+
+@media (max-width: 768px) {
+  .pet-list-container {
+    grid-template-columns: 1fr; /* 手机：1列 */
+  }
+  .pet-desc {
+    height: auto; /* 小屏幕取消固定高度 */
+    -webkit-line-clamp: unset; /* 取消行数限制 */
+  }
+}
