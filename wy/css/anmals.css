@@ -1,0 +1,459 @@
+/*顶部广告 start*/
+.header {
+    width: 100%;
+    height: 120px;
+    overflow: hidden; /* 裁剪超出header的部分（关键修改） */
+    position: relative;
+    /* 去掉flex居中，避免限制图片宽度 */
+}
+
+.header img {
+    width: 100%; /* 宽度强制撑满父容器（关键修改） */
+    height: 120px; /* 保持固定高度 */
+    object-fit: cover; /* 覆盖模式，裁剪多余部分，保持比例（关键修改） */
+    display: block; /* 消除图片底部默认空白 */
+}
+/*顶部广告 end*/
+
+/* 黑色导航  start*/
+
+.black-nav{
+    width:100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #bbd2fd;
+    font-size: 13px;
+     position: relative; /* 开启定位 */
+    z-index: 999; /* 导航层级高于图片，二维码基于导航定位 */
+}
+    
+.wrap{
+    width:1300px;
+    margin: 0 auto; /*边距,左右居中*/
+} 
+    
+/*左边导航*/
+.black-nav .wrap .black-nav-left{
+    float: left;
+}
+    
+/*右边导航*/
+.black-nav .wrap .black-nav-right{
+    float: right;
+}
+    
+.black-nav .wrap  li{
+    float: left;
+    position: relative;
+}
+.black-nav a{
+    color: #000000;
+}
+/*字间隔*/    
+.black-nav .wrap  li span{
+    color: #424242;
+    margin: 0 30px;
+}
+
+span{font-family: 'icomoon'; /*导入图标*/
+    margin-left: -10px; /* 向左偏移10px */
+    display: inline-block; /* 确保span能正常显示图标 */
+}
+
+/*导入字体图标库*/
+
+.download{
+    width: 124px;
+    height: 0;
+    background: #fff;
+    box-shadow: 0 1px 5px #aaa; /*设置元素的 阴影效果
+    0: 水平方向偏移为 0（不往左也不往右偏移）。
+    1px: 垂直方向偏移为 1 像素（阴影向下偏移 1 像素）。
+    5px: 模糊半径为 5 像素（阴影边缘模糊的范围）。
+    #aaa: 阴影颜色为浅灰色。*/
+    position:absolute;
+    top: 50px;
+    left: 30%;
+    margin-left: -62px;
+    overflow: hidden;
+    z-index: 9999; /* 极高层级，确保不被任何元素遮挡 */
+}
+
+
+.download img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.download p{
+    color: #333;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+/*让鼠标划到下载APP显示图片*/
+.black-nav-left li:hover>.download{
+    height:148px ;
+}
+
+/*小箭头*/
+.stri{
+    width: 0;
+    height: 0;  /*设置为0默认不显示*/
+    border-bottom: 8px solid #fff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    margin-left: -8px;
+    display: none;
+    z-index: 9999; /* 箭头层级同步提升 */
+}
+
+.black-nav-left li:hover>.stri{
+    display: block;
+}
+
+.cart{
+    width: 160px;
+    height: 50px;
+    background-color: #9ebef8;
+    margin-left: 25px; /*元素与其左侧内容之间的距离*/
+}
+
+.cart:hover{
+    background: #fff;
+}/*在鼠标悬停时，改变 .cart 的背景颜色，增强交互效果。*/
+
+.cart:hover>a{
+    color: rgb(226, 137, 74);
+}/*在鼠标悬停时，改变 .cart 内直接子元素 <a> 的文字颜色，增强交互效果。*/
+
+.cart i{
+    font-style: normal; /*设置 <i> 标签的字体样式为正常（非斜体）。默认情况下，<i> 标签的字体是斜体，此规则覆盖了默认样式。*/
+    margin-right: 8px;/*为 <i> 标签的右侧添加 8 像素的外边距，与右侧内容保持间距。*/
+}
+
+.cart-list{
+    width: 316px;
+    height: 0px; /*初始状态下，将 .cart-list 的高度设置为 0，使其不可见。*/
+    background: #fff;
+    box-shadow:  0 2px 10px rgba(0, 0, 0, 0.15);/*添加阴影效果，使 .cart-list 看起来有浮起的感觉。*/
+    position: absolute;
+    right: 0;/*将 .cart-list 定位到其父容器的右侧边缘。*/
+    top: 50px;
+    color: #424242;
+    overflow: hidden;/*隐藏 .cart-list 中超出容器的内容。*/
+    line-height: 100px;/*设置 .cart-list 的行高为 100 像素，使内容在垂直方向上居中（前提是内容只有一行）。*/
+}
+
+.cart:hover>.cart-list{
+    height: 100px;
+}/*在鼠标悬停时，显示 .cart-list 元素，并设置其高度为 100 像素。*/
+
+/* 小猫种类样式 */
+.cat {
+    position: relative;
+    padding: 0 10px; /* 给 .cat 添加左右内边距，使背景框更居中 */
+    cursor: pointer;
+    height: 50px; /* 添加固定高度 */
+    display: inline-flex; /* 使用inline-flex使内容垂直居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+
+.cat i{
+    font-style: normal; /*设置 <i> 标签的字体样式为正常（非斜体）。默认情况下，<i> 标签的字体是斜体，此规则覆盖了默认样式。*/
+    margin-right: 8px;/*为 <i> 标签的右侧添加 8 像素的外边距，与右侧内容保持间距。*/
+}
+
+
+/*黑色导航  end */
+
+
+/* 首页图片start */
+.hero-section {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* 开启定位，支持z-index */
+    z-index: 1; /* 远低于二维码的9999 */
+}
+
+/* 图片容器：限制最大宽度，适配屏幕 */
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 500px;
+    position: relative; /* 让文字/按钮绝对定位 */
+    border-radius: 8px;
+    overflow: hidden; /* 防止图片溢出 */
+    z-index: 1; /* 保持低层级 */
+    margin: 0 auto;
+}
+
+/* 背景图片样式 */
+.hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* 保持图片比例 */
+    object-position: center;
+    filter: brightness(0.8); /* 降低亮度，让文字更清晰 */
+}
+
+/* 文字+按钮容器（绝对居中） */
+.hero-content {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* 标题文字样式 */
+.hero-title {
+    font-size: 70px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 领养按钮（链接）样式 */
+.adopt-btn {
+    display: inline-block; /* 让a标签支持padding等按钮样式 */
+    padding: 20px 45px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #e63946;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-decoration: none; /* 去除链接下划线 */
+}
+
+/* 按钮hover效果 */
+.adopt-btn:hover {
+    background-color: #d62828;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    width: 95%; /* 小屏幕占比更大 */
+    height: 300px;
+  }
+}
+
+/* 宠物功能框整体容器 */
+.pet-features {
+    width: 100%;
+    padding: 60px 0; /* 上下间距，与图片区隔开 */
+    background-color: #f9f9f9; /* 浅背景色，和图片区分 */
+}
+
+.features-container {
+    width: 100%;
+    max-width: 1200px; /* 和首页图片容器宽度一致，保持视觉统一 */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; 
+    gap: 30px; /* 框之间的间距 */
+    padding: 0 20px; /* 左右留白，适配小屏幕 */
+}
+
+/* 单个功能卡片样式 */
+.feature-card {
+    flex: 1; /* 框平分宽度 */
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* 轻微阴影，提升质感 */
+    text-align: center; /* 内容居中 */
+}
+
+/* 图标样式 */
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #f59e0b; /* 橙色系，和示例图一致 */
+}
+
+/* 标题样式 */
+.feature-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 描述文字样式 */
+.feature-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* 按钮样式（和示例图橙色按钮匹配） */
+.feature-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #f97316;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none; /* 去除链接下划线 */
+    transition: background-color 0.3s ease;
+}
+
+.feature-btn:hover {
+    background-color: #ea580c; /*  hover加深颜色 */
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .features-container {
+        flex-direction: column;
+    }
+    .feature-card {
+        width: 100%;
+    }
+}
+/* 首页图end */
+
+/*登录+注册*/
+/* 登录注册容器 */
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* 切换标签栏 */
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+    color: #f97316;
+    border-bottom: 3px solid #f97316;
+}
+
+/* 表单容器 */
+.auth-forms {
+    padding: 30px;
+}
+
+/* 表单样式（默认隐藏注册表单） */
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+/* 表单组 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 标签 */
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 输入框 */
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #f97316;
+}
+
+/* 错误提示 */
+.error-tip {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+/* 提交按钮 */
+.submit-btn {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #f97316;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #ea580c;
+}
+
+/* 协议提示（注册页） */
+.agreement {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.agreement a {
+    color: #f97316;
+    text-decoration: none;
+}
+
+/* 响应式适配 */
+@media (max-width: 500px) {
+    .auth-container {
+        margin: 0 20px;
+    }
+    .auth-forms {
+        padding: 20px;
+    }
+}
